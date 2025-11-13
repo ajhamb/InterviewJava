@@ -1,3 +1,5 @@
+package interviewjava;
+
 import java.util.Scanner;
 
 /**
@@ -5,14 +7,22 @@ import java.util.Scanner;
  *
  * Usage:
  * 1) Provide two numbers as command-line arguments:
- *    java AddTwoNumbers 3 5
+ *    java interviewjava.AddTwoNumbers 3 5
  *
  * 2) Or run without args and enter two numbers when prompted (space or newline separated):
- *    java AddTwoNumbers
+ *    java interviewjava.AddTwoNumbers
  *    Enter first number: 3
  *    Enter second number: 5
  */
 public class AddTwoNumbers {
+    /**
+     * Add two numbers and return the result as a double.
+     * This method is exposed so unit tests can call it directly.
+     */
+    public static double add(double a, double b) {
+        return a + b;
+    }
+
     public static void main(String[] args) {
         double a = 0;
         double b = 0;
@@ -25,7 +35,7 @@ public class AddTwoNumbers {
                 fromArgs = true;
             } catch (NumberFormatException e) {
                 System.err.println("Error: command-line arguments must be numbers.");
-                System.err.println("Usage: java AddTwoNumbers <num1> <num2>");
+                System.err.println("Usage: java interviewjava.AddTwoNumbers <num1> <num2>");
                 System.exit(2);
             }
         }
@@ -48,7 +58,7 @@ public class AddTwoNumbers {
             }
         }
 
-        double sum = a + b;
+        double sum = add(a, b);
 
         // If both inputs were integral values, print without decimal point where appropriate
         if (isWholeNumber(a) && isWholeNumber(b)) {

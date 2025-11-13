@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'com.ajhamb'
+version = '1.0-SNAPSHOT'
+
+// Use Gradle Java toolchain to request a Java 21 JVM for compilation/runtime when available
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+    // Set source/target compatibility inside the java extension to avoid setting a property
+    // on the root Project object which causes evaluation errors in some Gradle versions.
+    sourceCompatibility = JavaVersion.toVersion('21')
+    targetCompatibility = JavaVersion.toVersion('21')
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.3'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+application {
+    // main class for `gradle run`
+    mainClass = 'interviewjava.AddTwoNumbers'
+}
