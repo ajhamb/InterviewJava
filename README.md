@@ -1,49 +1,53 @@
 # InterviewJava
-Coding interview Questions with Java
 
-## AddTwoNumbers
+This project contains a collection of small Java programs and solutions to common interview questions.
 
-This repository uses a standard Gradle layout with package `interviewjava`:
+## Programs
 
-- Production sources: `src/main/java/interviewjava`
-- Tests: `src/test/java/interviewjava`
+### 1. Add Two Numbers
 
-The `AddTwoNumbers` program adds two numbers and exposes `add(double,double)` for testing.
+A simple command-line utility to add two numbers.
 
-Build and run with Gradle:
+**File:** `src/main/java/interviewjava/AddTwoNumbers.java`
 
-Using your system Gradle:
+**Usage:**
 
-```zsh
-# compile
-gradle build
+You can run the program in two ways after building it:
 
-# run the program with args (example: 3 and 5)
-gradle run --args="3 5"
+1.  **Provide numbers as command-line arguments:**
+    ```sh
+    java -cp build/classes/java/main interviewjava.AddTwoNumbers 3 5
+    ```
 
-# run the tests
-gradle test
-```
+2.  **Run without arguments and enter numbers when prompted:**
+    ```sh
+    java -cp build/classes/java/main interviewjava.AddTwoNumbers
+    Enter first number: 3
+    Enter second number: 5
+    ```
 
-Using the Gradle wrapper (recommended for CI / reproducible builds):
+### 2. Remove Extra Brackets
 
-```zsh
-# generate wrapper (if not present)
-gradle wrapper
+This program contains a method to remove extra (unbalanced) parentheses from a given string.
 
+**File:** `src/main/java/interviewjava/StackProblems.java`
+
+The `removeExtraBracket(String input)` method uses a stack to identify and remove parentheses that do not form a valid, balanced pair.
+
+## Building and Testing
+
+This project uses the Gradle wrapper to build and run tests.
+
+### Build the Project and Run Tests
+
+To compile the code and run the tests, execute the following command from the project root directory:
+
+```sh
 ./gradlew build
-./gradlew run --args="3 5"
-./gradlew test
 ```
 
-Files moved/added
-- src/main/java/interviewjava/AddTwoNumbers.java — main program
-- src/test/java/interviewjava/AddTwoNumbersTest.java — JUnit 5 tests
-- build.gradle — Gradle build file (JUnit and application plugin)
-- settings.gradle — Gradle project settings
+### View Test Report
 
-Notes
-- The test suite uses JUnit 5. Gradle's `test` task is configured to use JUnit Platform.
-- `gradle run --args="<num1> <num2>"` will run `interviewjava.AddTwoNumbers`.
+The `build` command automatically runs all JUnit tests. After the build is complete, you can view a detailed HTML report of the test results by opening the following file in your web browser:
 
-```
+`build/reports/tests/test/index.html`
