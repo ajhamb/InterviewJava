@@ -1,53 +1,48 @@
-# InterviewJava
-cle
+
 This project contains a collection of small Java programs and solutions to common interview questions.
 
-## Programs
+## Classes
 
-### 1. Add Two Numbers
+### `AddTwoNumbers.java`
 
-A simple command-line utility to add two numbers.
+This class provides a simple utility to add two numbers and can be run from the command line.
 
 **File:** `src/main/java/interviewjava/AddTwoNumbers.java`
 
-**Usage:**
+#### Methods
+- **`add(double a, double b)`**: Takes two double-precision numbers and returns their sum.
 
-You can run the program in two ways after building it:
+#### Usage
+You can run the `main` method in two ways after building the project:
 
 1.  **Provide numbers as command-line arguments:**
     ```sh
     java -cp build/classes/java/main interviewjava.AddTwoNumbers 3 5
     ```
-
 2.  **Run without arguments and enter numbers when prompted:**
     ```sh
     java -cp build/classes/java/main interviewjava.AddTwoNumbers
     Enter first number: 3
     Enter second number: 5
     ```
+### `StackProblems.java`
 
-### 2. Remove Extra Brackets
-
-This program contains a method to remove extra (unbalanced) parentheses from a given string.
+This class contains solutions to common interview problems that can be solved using a Stack data structure.
 
 **File:** `src/main/java/interviewjava/StackProblems.java`
 
-The `removeExtraBracket(String input)` method uses a stack to identify and remove parentheses that do not form a valid, balanced pair.
+#### Methods
+- **`removeExtraBracket(String input)`**: This method takes a string as input and removes any parentheses that are not part of a balanced pair. It uses a stack to keep track of the indices of parentheses to identify and remove the extra ones.
+
+### `SubarrayProblems.java`
+
+This class is dedicated to solving various problems related to contiguous subarrays within an array.
+
+**File:** `src/main/java/interviewjava/SubarrayProblems.java`
+
+#### Methods
+- **`maxSubarraywithTwoDistinctIntegers(int[] nums)`**: This method finds the length of the longest contiguous subarray that contains at most two distinct integers. It implements an efficient sliding window approach using a hash map to track the frequency of elements in the current window.
 
 ## Building and Testing
 
-This project uses the Gradle wrapper to build and run tests.
 
-### Build the Project and Run Tests
-
-To compile the code and run the tests, execute the following command from the project root directory:
-
-```sh
-./gradlew build
-```
-
-### View Test Report
-
-The `build` command automatically runs all JUnit tests. After the build is complete, you can view a detailed HTML report of the test results by opening the following file in your web browser:
-
-`build/reports/tests/test/index.html`
