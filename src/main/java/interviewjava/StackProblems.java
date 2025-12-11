@@ -28,4 +28,43 @@ public class StackProblems {
 
         return sb.toString();
     }
+
+    public int minParenthesisRemove(String input) {
+        // Stack<Character> stack = new Stack<>();
+        // int removeCount = 0;
+
+        // for (char c : input.toCharArray()) {
+        //     if (c == '(') {
+        //         stack.push(c);
+        //     } else if (c == ')') {
+        //         if (!stack.isEmpty() && stack.peek() == '(') {
+        //             stack.pop();
+        //         } else {
+        //             removeCount++;
+        //         }
+        //     }
+        // }
+
+        // removeCount += stack.size();
+        // return removeCount;
+
+        int removeCount = 0;
+        int open = 0;
+
+        for (char c : input.toCharArray()) {
+            if (c == '(') {
+                open++;
+            } else if (c == ')') {
+                if (open > 0) {
+                    open --;
+                } else {
+                    removeCount++;
+                }
+            }
+        }
+
+        removeCount += open;
+        return removeCount;
+
+    }
 }
