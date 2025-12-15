@@ -1,42 +1,29 @@
 package interviewjava;
 
-import java.util.LinkedList;
+import java.util.Collections;
+import java.util.PriorityQueue;
 
 public class MedianStreamDS {
 
-    LinkedList<Integer> list;
+    private PriorityQueue<Integer> minQ = new PriorityQueue<>();
+    private PriorityQueue<Integer> maxQ = new PriorityQueue<>(Collections.reverseOrder());
+
+
     public MedianStreamDS() {
-        list = new LinkedList<>();
+  
     }
 
     public void addNum(int num) {
-        if (list.isEmpty()) {
-            list.add(num);
-            return;
+        maxQ.offer(num);
+        minQ.offer(maxQ.poll());
+        if (minQ.size() - maxQ.size() > 1) {
+            maxQ.offer(minQ.poll());
         }
-        int left = 0, right = list.size() - 1;
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            if (list.get(mid) == num) {
-                list.add(mid, num);
-                return;
-            } else if (list.get(mid) < num) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
-            }
-        }
-        list.add(left, num);
     }
 
     public double findMedian() {
-        int size = list.size();
-        if (size % 2 == 1) {
-            return list.get(size / 2);
-        } else {
-            return (list.get(size / 2 - 1) + list.get(size / 2)) / 2.0;
-        }
+        return minQ.size() == maxQ.size() ? (minQ.peek() + maxQ.peek()) / 2.0 : minQ.peek();
     }
-    
+
     
 }

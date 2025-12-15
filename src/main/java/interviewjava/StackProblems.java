@@ -57,7 +57,8 @@ public class StackProblems {
             } else if (c == ')') {
                 if (open > 0) {
                     open --;
-                } else {
+                }
+                else {
                     removeCount++;
                 }
             }

@@ -8,7 +8,7 @@ class MedianStreamDSTest {
     @Test
     void testFindMedian_emptyStream_throwsException() {
         MedianStreamDS medianFinder = new MedianStreamDS();
-        assertThrows(IndexOutOfBoundsException.class, () -> {
+        assertThrows(NullPointerException.class, () -> {
             medianFinder.findMedian();
         });
     }

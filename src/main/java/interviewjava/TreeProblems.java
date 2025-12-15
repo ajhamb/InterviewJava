@@ -1,5 +1,9 @@
 package interviewjava;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Queue;
+
 class TreeNode {
     int val;
     TreeNode left;
@@ -37,4 +41,47 @@ public class TreeProblems {
 
         return leftSum + rightSum + node.val;
     }
+
+    public int findLowestComonAncestor(TreeNode root, int p, int q) {
+        if (root == null) {
+            return -1;
+        }
+
+        if(root.val == p || root.val == q) {
+            return root.val;
+        }
+
+        int left = findLowestComonAncestor(root.left, p, q);
+        int right = findLowestComonAncestor(root.right, p, q);
+
+        if (left != -1 && right != -1) {
+            return root.val;
+        }
+
+        return left != -1 ? left : right;
+    }
+
+    public int diameterOfBinaryTree(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        int[] diameter = new int[1];
+        computeHeight(root, diameter);
+        return diameter[0];
+    }
+    private int computeHeight(TreeNode node, int[] diameter) {
+        if (node == null) {
+            return 0;
+        }
+
+        int leftHeight = computeHeight(node.left, diameter);
+        int rightHeight = computeHeight(node.right, diameter);
+
+        diameter[0] = Math.max(diameter[0], leftHeight + rightHeight);
+
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+    
 }

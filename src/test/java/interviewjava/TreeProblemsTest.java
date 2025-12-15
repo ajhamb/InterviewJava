@@ -142,4 +142,112 @@ public class TreeProblemsTest {
         // Total tilt = 0 + 3 + 5 = 8
         assertEquals(8, treeProblems.findTilt(root));
     }
+
+    @Test
+    void testFindLowestCommonAncestor_rootIsNull() {
+        TreeProblems treeProblems = new TreeProblems();
+        assertEquals(-1, treeProblems.findLowestComonAncestor(null, 1, 2));
+    }
+
+    @Test
+    void testFindLowestCommonAncestor_rootIsOneOfNodes() {
+        TreeProblems treeProblems = new TreeProblems();
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        // LCA of 1 and 2 is 1
+        assertEquals(1, treeProblems.findLowestComonAncestor(root, 1, 2));
+        // LCA of 1 and 3 is 1
+        assertEquals(1, treeProblems.findLowestComonAncestor(root, 1, 3));
+    }
+
+    @Test
+    void testFindLowestCommonAncestor_nodesInDifferentSubtrees() {
+        TreeProblems treeProblems = new TreeProblems();
+        TreeNode root = new TreeNode(3);
+        root.left = new TreeNode(5);
+        root.right = new TreeNode(1);
+        root.left.left = new TreeNode(6);
+        root.left.right = new TreeNode(2);
+        root.right.left = new TreeNode(0);
+        root.right.right = new TreeNode(8);
+
+        // LCA of 5 and 1 is 3
+        assertEquals(3, treeProblems.findLowestComonAncestor(root, 5, 1));
+        // LCA of 6 and 0 is 3
+        assertEquals(3, treeProblems.findLowestComonAncestor(root, 6, 0));
+    }
+
+    @Test
+    void testFindLowestCommonAncestor_oneNodeIsAncestorOfOther() {
+        TreeProblems treeProblems = new TreeProblems();
+        TreeNode root = new TreeNode(3);
+        root.left = new TreeNode(5);
+        root.left.left = new TreeNode(6);
+        root.left.right = new TreeNode(2);
+        root.left.right.left = new TreeNode(7);
+        root.left.right.right = new TreeNode(4);
+
+        // LCA of 5 and 4 is 5
+        assertEquals(5, treeProblems.findLowestComonAncestor(root, 5, 4));
+    }
+
+    @Test
+    void testFindLowestCommonAncestor_neitherNodeExists() {
+        TreeProblems treeProblems = new TreeProblems();
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        // Neither 4 nor 5 exist in the tree
+        assertEquals(-1, treeProblems.findLowestComonAncestor(root, 4, 5));
+    }
+
+    @Test
+    void testFindLowestCommonAncestor_oneNodeMissing() {
+        TreeProblems treeProblems = new TreeProblems();
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        // 2 exists, 4 does not.
+        // Current implementation returns 2 (the found node) as it assumes the other node is a descendant or exists elsewhere.
+        assertEquals(2, treeProblems.findLowestComonAncestor(root, 2, 4));
+    }
+
+    @Test
+    void testDiameterOfBinaryTree_nullRoot() {
+        TreeProblems treeProblems = new TreeProblems();
+        assertEquals(0, treeProblems.diameterOfBinaryTree(null));
+    }
+
+    @Test
+    void testDiameterOfBinaryTree_singleNode() {
+        TreeProblems treeProblems = new TreeProblems();
+        TreeNode root = new TreeNode(1);
+        assertEquals(0, treeProblems.diameterOfBinaryTree(root));
+    }
+
+    @Test
+    void testDiameterOfBinaryTree_simpleTree() {
+        TreeProblems treeProblems = new TreeProblems();
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        // Path: 2 -> 1 -> 3 (length 2)
+        assertEquals(2, treeProblems.diameterOfBinaryTree(root));
+    }
+
+    @Test
+    void testDiameterOfBinaryTree_diameterNotThroughRoot() {
+        TreeProblems treeProblems = new TreeProblems();
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.left.left = new TreeNode(3);
+        root.left.right = new TreeNode(4);
+        root.left.left.left = new TreeNode(5);
+        root.left.right.right = new TreeNode(6);
+
+        // Path: 5 -> 3 -> 2 -> 4 -> 6 (length 4)
+        // Root (1) is not part of the longest path.
+        assertEquals(4, treeProblems.diameterOfBinaryTree(root));
+    }
 }
